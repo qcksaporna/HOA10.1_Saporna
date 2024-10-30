@@ -1,0 +1,31 @@
+- name: Install dependencies
+  apt:
+    name: gnupg
+    state: present
+    update_cache: yes
+
+- name: Add Elastic APT repository key
+  apt_key:
+    url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+    state: present
+
+- name: Add Elastic APT repository
+  apt_repository:
+    repo: "deb https://artifacts.elastic.co/packages/7.x/apt stable main"
+    state: present
+
+- name: Install Kibana
+  apt:
+    name: kibana
+    state: present
+
+- name: Configure Kibana
+  template:
+    src: kibana.yml.j2
+    dest: /etc/kibana/kibana.yml
+
+- name: Start and enable Kibana service
+  systemd:
+    name: kibana
+    enabled: yes
+    state: started

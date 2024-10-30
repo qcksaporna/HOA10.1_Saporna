@@ -1,0 +1,12 @@
+
+[elasticsearch]
+#centos
+192.168.56.115 ansible_user=qcksaporna
+
+[logstash]
+#ubuntu
+192.168.56.114
+
+[kibana]
+#ubuntu
+192.168.56.113
